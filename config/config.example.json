@@ -1,0 +1,6 @@
+{
+    "server": {
+        "port":5906,
+        "instance_type":"Default"
+    }
+}
