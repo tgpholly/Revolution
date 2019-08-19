@@ -3,8 +3,11 @@ const fs = require("fs");
 module.exports = {
     handle:function(modules, internals, emoji, req, res) {
         /*
-        req - Request from client
-        res - Response from server
+            modules   - Modules that are loaded when Revolution starts
+            internals - Predefined variables, e.g the version and lables like "INFO"
+            emoji     - Pretty self explanitory, the list of emojis used in Revolution.
+            req       - Request from client
+            res       - Response from server
         */
         res.set("Server-Type", "Revolution");
         if (req.url == "/") {
