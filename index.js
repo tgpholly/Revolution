@@ -4,11 +4,9 @@ var endTime;
 
 const express = require("express"),
 app = express(),
-randomstring = require("randomstring"),
 fs = require("fs"),
 chalk = require("chalk"),
-busboy = require("connect-busboy");
-const config = require("./config/config.json")
+config = require("./config/config.json");
 let modules = {};
 console.clear();
 
