@@ -1,5 +1,4 @@
 const express = require("express"),
-app = express(),
 fs = require("fs"),
 chalk = require("chalk"),
 config = require("./config/config.json"),
@@ -8,6 +7,7 @@ global.actualDir = __dirname;
 global.internals = {
     version:"Open Source",
 };
+global.app = express();
 global.modules = [];
 let dE = new Date(),
 startTime = dE.getTime(),
@@ -53,6 +53,7 @@ fs.readFile('./misc/ascii.txt', function(err, data) {
 });
 
 function server() {
+    reqhandler.extras();
     app.get('*', (req, res) => reqhandler.get(req, res));
     app.post('*', (req, res) => reqhandler.post(req, res));
     app.listen(config.server.port, () => {

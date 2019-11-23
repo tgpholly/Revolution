@@ -17,6 +17,10 @@ if (!fs.existsSync(__dirname + BASE_PATH + "/files")) {
 }
 
 module.exports = {
+    extras:function() {
+        // Anything else that is needed like busboy
+        // Put them to global.app (the express app)
+    },
     get:function(req, res) {
         /*
             req - Request from client
