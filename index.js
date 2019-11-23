@@ -36,6 +36,7 @@ fs.readFile('./misc/ascii.txt', function(err, data) {
                     console.log(`[Modules] Found module ${files[i].toString()}`);
                     // We want to find out what the request handler module is
                     if (global.modules[files[i].toString().replace(".js", "")].MOD_FUNC == "handle_requests") {
+                        // Set reqhandler to the request handler for easy getting
                         reqhandler = global.modules[files[i].toString().replace(".js", "")];
                     }
                 } else {
