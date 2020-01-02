@@ -3,6 +3,15 @@ fs = require("fs"),
 chalk = require("chalk"),
 config = require("./config/config.json"),
 emoji = require("./misc/emoji_list.json");
+class reqMod {
+    constructor(name, status) {
+        this.name = name;
+        this.status = status;
+    }
+}
+const requiredModules = [
+    new reqMod("handle_console", false)
+];
 global.actualDir = __dirname;
 global.internals = {
     version:"Open Source",
@@ -34,6 +43,12 @@ fs.readFile('./misc/ascii.txt', function(err, data) {
                 if (files[i].includes(".js")) {
                     console.log(`[Modules] Found module ${files[i].toString()}`);
                     global.modules[files[i].toString().replace(".js", "")] = require(`./modules/${files[i].toString()}`);
+                    // Loop through and set the required modules flags
+                    for (var i1 = 0; i1 < requiredModules.length; i1++) {
+                        if (global.modules[files[i].toString().replace(".js", "")].MOD_FUNC == requiredModules[i1].name) {
+                            requiredModules[i1].status = true;
+                        }
+                    }
                     // We want to find out what the request handler module is
                     if (global.modules[files[i].toString().replace(".js", "")].MOD_FUNC == "handle_requests") {
                         // Set reqhandler to the request handler for easy getting
@@ -48,8 +63,22 @@ fs.readFile('./misc/ascii.txt', function(err, data) {
                 console.log(chalk.bgRed(` ! [Modules] ${err} ! `));
             }
         }
-        global.modules.consoleHelper.printInfo(emoji.wave, "Starting Revolution...");
-        server();
+        // Check if all the required modules flags are set
+        let allRequiredExist = [];
+        for (var i = 0; i < requiredModules.length; i++) {
+            if (requiredModules[i].status) {
+                allRequiredExist.push(true);
+            }
+        }
+        if (allRequiredExist.length !== requiredModules.length) {
+            // Exit if all required modules are not found
+            console.log("[Modules] All required modules could not be found.");
+            console.log("[Modules] Server will not start until all required modules are found.");
+            process.exit(1);
+        } else {
+            global.modules.consoleHelper.printInfo(emoji.wave, "Starting Revolution...");
+            server();
+        }
     });
 });
 
