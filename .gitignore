@@ -4,3 +4,4 @@ node_modules/
 package-lock.json
 config/config.json
 utils/
+modules/consoleHelper/config.json
