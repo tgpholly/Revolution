@@ -11,9 +11,11 @@ BASE_PATH = "/example_request_handler";
 // Makes the folders for files of the module
 if (!fs.existsSync(__dirname + BASE_PATH)) {
     fs.mkdirSync(__dirname + BASE_PATH);
+    console.log(`[example_request_handler] Made example_request_handler module folder`);
 }
 if (!fs.existsSync(__dirname + BASE_PATH + "/files")) {
     fs.mkdirSync(__dirname + BASE_PATH + "/files");
+    console.log(`[example_request_handler] Made example_request_handler module files folder`);
 }
 
 module.exports = {
