@@ -15,8 +15,7 @@
 <h2 align="left">How to use Revolution.</h2>
 <h3 align="left">From source</h3>
 <p align="left">
-```
-git clone https://github.com/tgpethan/Revolution.git
+```git clone https://github.com/tgpethan/Revolution.git
 cd Revolution
 npm i
 node . 
@@ -24,8 +23,7 @@ node .
 </p>
 <h3 align="left">From build</h3>
 <p align="left">
-```
-Download latest build (https://github.com/tgpethan/Revolution/releases/latest) 
+```Download latest build (https://github.com/tgpethan/Revolution/releases/latest) 
 Unzip the zip
 Run revolution executable 
 ```
