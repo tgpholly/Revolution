@@ -1,7 +1,6 @@
 const express = require("express"),
 fs = require("fs"),
 chalk = require("chalk"),
-config = require("./config/config.json"),
 emoji = require("./misc/emoji_list.json");
 class reqMod {
     constructor(name, status) {
@@ -12,6 +11,14 @@ class reqMod {
 const requiredModules = [
     new reqMod("handle_console", false)
 ];
+let config;
+if (fs.existsSync("./config/config.json")) {
+    config = require("./config/config.json");
+} else {
+    console.log("[Config] Config file doesn't exist! You probably haven't copied the example config in the config directory.");
+    console.log("[Config] Exiting...");
+    process.exit(1);
+}
 global.actualDir = __dirname;
 global.internals = {
     version:"Open Source",
