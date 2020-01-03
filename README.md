@@ -23,10 +23,9 @@ node .
 </p>
 <h3 align="left">From build</h3>
 <p align="left">
-```Download latest build (https://github.com/tgpethan/Revolution/releases/latest) 
-Unzip the zip
-Run revolution executable 
-```
+`Download latest build (https://github.com/tgpethan/Revolution/releases/latest)` 
+`Unzip the zip`
+`Run revolution executable `
 </p>
 <h2 align="left">How to install modules.</h2>
 <p align="left">With modules you simply have to place the module inside the modules folder and start the server.
