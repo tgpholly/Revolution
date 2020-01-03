@@ -14,15 +14,10 @@
 <p align="left">Modules are loaded in at runtime and are completely separate from each other. Each module has a prefix, for example the request handlers have the prefix “handle_console”. These prefixes determine the function of the modules and help the server to function.</p>
 <h2 align="left">How to use Revolution.</h2>
 <h3 align="left">From source</h3>
-<p align="left">git clone https://github.com/tgpethan/Revolution.git
-cd Revolution
-npm i
-node .
+<p align="left">git clone https://github.com/tgpethan/Revolution.git then, cd Revolution. run npm i, then run node .
 </p>
 <h3 align="left">From build</h3>
-<p align="left">Download latest build (https://github.com/tgpethan/Revolution/releases/latest)
-Unzip the zip
-Run revolution executable 
+<p align="left">Download latest build (https://github.com/tgpethan/Revolution/releases/latest) then Unzip the zip and Run revolution executable 
 </p>
 <h2 align="left">How to install modules.</h2>
 <p align="left">With modules you simply have to place the module inside the modules folder and start the server.
