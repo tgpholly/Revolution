@@ -5,3 +5,4 @@ package-lock.json
 config/config.json
 utils/
 modules/consoleHelper/config.json
+.DS_Store
