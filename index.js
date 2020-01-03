@@ -66,9 +66,7 @@ fs.readFile('./misc/ascii.txt', function(err, data) {
         // Check if all the required modules flags are set
         let allRequiredExist = [];
         for (var i = 0; i < requiredModules.length; i++) {
-            if (requiredModules[i].status) {
-                allRequiredExist.push(true);
-            }
+            allRequiredExist.push(requiredModules[i].status);
         }
         if (allRequiredExist.length !== requiredModules.length) {
             // Exit if all required modules are not found
