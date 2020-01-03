@@ -19,11 +19,11 @@ if (!fs.existsSync(__dirname + BASE_PATH + "/files")) {
 }
 
 module.exports = {
-    extras:function() {
+    extras:async function() {
         // Anything else that is needed like busboy
         // Put them to global.app (the express app)
     },
-    get:function(req, res) {
+    get:async function(req, res) {
         /*
             req - Request from client
             res - Response from server
@@ -39,7 +39,7 @@ module.exports = {
             }
         });
     },
-    post:function(req, res) {
+    post:async function(req, res) {
         /*
             req - Request from client
             res - Response from server
