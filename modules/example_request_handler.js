@@ -29,11 +29,14 @@ module.exports = {
             res - Response from server
         */
         
+        // Make sure the file exists
         fs.access(__dirname + BASE_PATH + "/files" + req.url, fs.F_OK, error => {
             if (error) {
+                // File doesn't exist, return a 404 to the client.
                 global.modules.consoleHelper.printWarn(emoji.page, `${req.method}: ${req.url} was requested - Returned 404`);
                 res.status(404).send("404!<hr>Revolution");
             } else {
+                // File does exist, send the file back to the client.
                 global.modules.consoleHelper.printInfo(emoji.page, `${req.method}: ${req.url} was requested`);
                 res.sendFile(__dirname + BASE_PATH + "/files" + req.url);
             }
