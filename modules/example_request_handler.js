@@ -20,14 +20,20 @@ if (!fs.existsSync(__dirname + BASE_PATH + "/files")) {
 
 module.exports = {
     extras:async function() {
-        // Anything else that is needed like busboy
-        // Put them to global.app (the express app)
+        /*
+            Anything else that needs to be loaded into the framework
+            can be done here, this is used for things like busboy that
+            need to be put to the express server to work
+            The express server is accessable from global.app
+        */
     },
     get:async function(req, res) {
         /*
             req - Request from client
             res - Response from server
         */
+
+        // Anything that needs to be done in a GET request can be done here
         
         // Make sure the file exists
         fs.access(__dirname + BASE_PATH + "/files" + req.url, fs.F_OK, error => {
@@ -48,7 +54,7 @@ module.exports = {
             res - Response from server
         */
 
-        // Anything that needs to be done with a post can be done here.
+        // Anything that needs to be done with a POST can be done here.
     }
 }
 
