@@ -13,7 +13,7 @@ const requiredModules = [
 ];
 let config;
 if (fs.existsSync("./config/config.json")) {
-    config = require("./config/config.json");
+    config = JSON.parse(fs.readFileSync("./config/config.json"));
 } else {
     console.log("[Config] Config file doesn't exist! You probably haven't copied the example config in the config directory.");
     console.log("[Config] Exiting...");
