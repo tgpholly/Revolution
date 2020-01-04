@@ -61,6 +61,13 @@ fs.readFile('./misc/ascii.txt', function(err, data) {
                 if (files[i].includes(".js")) {
                     console.log(`[Modules] Found module ${files[i].toString()}`);
                     global.modules[files[i].toString().replace(".js", "")] = require(`./modules/${files[i].toString()}`);
+                    
+                    // We want to find out what the request handler module is
+                    if (global.modules[files[i].toString().replace(".js", "")].MOD_FUNC == "handle_requests") {
+                        // Set reqhandler to the request handler for easy getting
+                        reqhandler = global.modules[files[i].toString().replace(".js", "")];
+                    }
+
                     // Loop through and set the required modules flags
                     for (var i1 = 0; i1 < requiredModules.length; i1++) {
                         // Check if this module is a required module
@@ -68,11 +75,6 @@ fs.readFile('./misc/ascii.txt', function(err, data) {
                             // It is a required module, set the status flag of this one to true
                             requiredModules[i1].status = true;
                         }
-                    }
-                    // We want to find out what the request handler module is
-                    if (global.modules[files[i].toString().replace(".js", "")].MOD_FUNC == "handle_requests") {
-                        // Set reqhandler to the request handler for easy getting
-                        reqhandler = global.modules[files[i].toString().replace(".js", "")];
                     }
                 } else {
                     // File is not a .js file (module)
@@ -102,7 +104,7 @@ fs.readFile('./misc/ascii.txt', function(err, data) {
         } else {
             // All required modules are found, start the framework's server.
             global.modules.consoleHelper.printInfo(emoji.wave, "Starting Revolution...");
-            server();
+            frameworkServer();
         }
     });
 });
