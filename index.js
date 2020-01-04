@@ -114,6 +114,7 @@ function server() {
 }
 
 function highlightHeader(s) {
+    // Add the appropriate colours to the header and add information to it
     const s1 = s.toString().replace("|replaceVersion|", `${chalk.yellow("Version:")} ${chalk.cyan(internals.version)}`)
     .replace("|titlecard|", chalk.yellow("A modular and fexible server"))
     .replace("|replaceType|", `${chalk.yellow("Instance: ")}${chalk.cyan(config.server.instance_type)}`);
