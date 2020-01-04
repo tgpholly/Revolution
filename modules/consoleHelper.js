@@ -19,17 +19,21 @@ if (!fs.existsSync(__dirname + BASE_PATH + "/config.json")) {
     console.log(`[consoleHelper] Made consoleHelper config file`);
 }
 
+// Load in config
 const config = require(__dirname + BASE_PATH + "/config.json");
 
 module.exports = {
+    // Prints a bit of information to the console
     printInfo:function(emoji, s) {
         console.log(chalk.green(`[${this.getTime24()}] `)+chalk.bgGreen(chalk.black(" INFO "))+` ${emoji} ${s}`);
     },
 
+    // Prints a warning to the console
     printWarn:function(emoji, s) {
         console.warn(chalk.green(`[${this.getTime24()}] `)+chalk.bgYellow(chalk.black(" WARN "))+` ${emoji} ${s}`);
     },
 
+    // Prints an error to the console
     printError:function(emoji, s) {
         console.error(chalk.green(`[${this.getTime24()}] `)+chalk.bgRed(chalk.black(" ERROR "))+` ${emoji} ${s}`);
     },
@@ -46,6 +50,7 @@ module.exports = {
         }
     },
 
+    // Function for converting 24 hour to 12 hour time
     t2412:function(inp) {
         // Check what time it is, AM or PM.
         if (parseInt(inp.split(":")[0]) > 11) {
