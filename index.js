@@ -2,12 +2,14 @@ const express = require("express"),
 fs = require("fs"),
 chalk = require("chalk"),
 emoji = require("./misc/emoji_list.json");
+// This is a class that contains the name and status of required modules
 class reqMod {
     constructor(name, status) {
         this.name = name;
         this.status = status;
     }
 }
+// Array containing a list of required modules and their flags
 const requiredModules = [
     new reqMod("handle_console", false)
 ];
@@ -40,11 +42,13 @@ console.clear();
 
 // Read the server header for output
 fs.readFile('./misc/ascii.txt', function(err, data) {
+    // Make sure there are no errors
     if (err) throw err;
     // Generate and Print the banner
     console.log(highlightHeader(data));
     // Get the modules from the ./modules folder
     fs.readdir("./modules", (err, files) => {
+        // Make sure there are no errors
         if (err) throw err;
         for (var i = 0; i < files.length; i++) {
             /*
@@ -59,7 +63,9 @@ fs.readFile('./misc/ascii.txt', function(err, data) {
                     global.modules[files[i].toString().replace(".js", "")] = require(`./modules/${files[i].toString()}`);
                     // Loop through and set the required modules flags
                     for (var i1 = 0; i1 < requiredModules.length; i1++) {
+                        // Check if this module is a required module
                         if (global.modules[files[i].toString().replace(".js", "")].MOD_FUNC == requiredModules[i1].name) {
+                            // It is a required module, set the status flag of this one to true
                             requiredModules[i1].status = true;
                         }
                     }
@@ -69,7 +75,10 @@ fs.readFile('./misc/ascii.txt', function(err, data) {
                         reqhandler = global.modules[files[i].toString().replace(".js", "")];
                     }
                 } else {
+                    // File is not a .js file (module)
+                    // Make sure the file is not a directory
                     if (files[i].split(".").length < 2) continue;
+                    // Inform user that a file that was found in the modules folder is not a module
                     console.log(`[Modules] Found file ${files[i]}. It is not a module.`)
                 }
             } catch (err) {
@@ -85,9 +94,10 @@ fs.readFile('./misc/ascii.txt', function(err, data) {
         }
         // Make sure all required modules are found
         if (allRequiredExist.length !== requiredModules.length) {
-            // They are not all found, exit framework with code 1.
+            // Inform the user that not all required modules are found.
             console.log("[Modules] All required modules could not be found.");
             console.log("[Modules] Server will not start until all required modules are found.");
+            // They are not all found, exit framework with code 1.
             process.exit(1);
         } else {
             // All required modules are found, start the framework's server.
