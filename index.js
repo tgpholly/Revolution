@@ -107,7 +107,7 @@ fs.readFile('./misc/ascii.txt', function(err, data) {
     });
 });
 
-function server() {
+function frameworkServer() {
     // Load in the request handler's extra required items.
     reqhandler.extras();
     // Define where GET requests go to in the request handlers.
