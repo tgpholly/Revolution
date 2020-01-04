@@ -50,16 +50,18 @@ fs.readFile('./misc/ascii.txt', function(err, data) {
                 if (files[i].includes(".js")) {
                     console.log(`[Modules] Found module ${files[i].toString()}`);
                     global.modules[files[i].toString().replace(".js", "")] = require(`./modules/${files[i].toString()}`);
+                    
+                    // We want to find out what the request handler module is
+                    if (global.modules[files[i].toString().replace(".js", "")].MOD_FUNC == "handle_requests") {
+                        // Set reqhandler to the request handler for easy getting
+                        reqhandler = global.modules[files[i].toString().replace(".js", "")];
+                    }
+
                     // Loop through and set the required modules flags
                     for (var i1 = 0; i1 < requiredModules.length; i1++) {
                         if (global.modules[files[i].toString().replace(".js", "")].MOD_FUNC == requiredModules[i1].name) {
                             requiredModules[i1].status = true;
                         }
-                    }
-                    // We want to find out what the request handler module is
-                    if (global.modules[files[i].toString().replace(".js", "")].MOD_FUNC == "handle_requests") {
-                        // Set reqhandler to the request handler for easy getting
-                        reqhandler = global.modules[files[i].toString().replace(".js", "")];
                     }
                 } else {
                     if (files[i].split(".").length < 2) continue;
@@ -82,12 +84,12 @@ fs.readFile('./misc/ascii.txt', function(err, data) {
             process.exit(1);
         } else {
             global.modules.consoleHelper.printInfo(emoji.wave, "Starting Revolution...");
-            server();
+            frameworkServer();
         }
     });
 });
 
-function server() {
+function frameworkServer() {
     reqhandler.extras();
     app.get('*', (req, res) => reqhandler.get(req, res));
     app.post('*', (req, res) => reqhandler.post(req, res));
