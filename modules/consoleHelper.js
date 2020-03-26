@@ -15,7 +15,7 @@ if (!fs.existsSync(__dirname + BASE_PATH)) {
 }
 // Creates the consoleHelper config file
 if (!fs.existsSync(__dirname + BASE_PATH + "/config.json")) {
-    fs.writeFileSync(__dirname + BASE_PATH + "/config.json", JSON.stringify({"24hour":true}));
+    fs.writeFileSync(__dirname + BASE_PATH + "/config.json", `{\n\t"24hour":true\n}`);
     console.log(`[consoleHelper] Made consoleHelper config file`);
 }
 
