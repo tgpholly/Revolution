@@ -113,9 +113,15 @@ function frameworkServer() {
     // Load in the request handler's extra required items.
     reqhandler.extras();
     // Define where GET requests go to in the request handlers.
-    app.get('*', (req, res) => reqhandler.get(req, res));
+    app.get('*', (req, res) => {
+        res.set("X-Powered-By", "Revolution");
+        reqhandler.get(req, res);
+    });
     // Define where POST requests go to in the request handlers.
-    app.post('*', (req, res) => reqhandler.post(req, res));
+    app.post('*', (req, res) => {
+        res.set("X-Powered-By", "Revolution");
+        reqhandler.post(req, res);
+    });
     // Start the server listening at the port defined in the config file
     app.listen(config.server.port, () => {
         dE = new Date(),
