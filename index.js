@@ -104,6 +104,10 @@ fs.readFile('./misc/ascii.txt', function(err, data) {
         } else {
             // All required modules are found, start the framework's server.
             global.modules.consoleHelper.printInfo(emoji.wave, "Starting Revolution...");
+            if (reqhandler == null) {
+                global.modules.consoleHelper.printError(emoji.cross, "No request handler was loaded, possibly due to an error.");
+                process.exit(1);
+            }
             frameworkServer();
         }
     });
