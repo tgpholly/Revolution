@@ -33,3 +33,6 @@ With modules you simply have to place the module inside the modules folder and s
 The modules will automatically set themselves up and the server will start as normal.
 ## Projects Revolution is used in
 [EUS](https://github.com/tgpethan/EUS/)
+[EUS-blog](https://github.com/tgpethan/EUS-blog)
+[EUS-wiki](https://github.com/tgpethan/EUS-wiki)
+[quotes](https://github.com/tgpethan/quotes)
