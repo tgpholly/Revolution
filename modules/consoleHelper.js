@@ -25,20 +25,21 @@ const config = require(__dirname + BASE_PATH + "/config.json");
 module.exports = {
     // Prints a bit of information to the console
     printInfo:function(emoji, s) {
-        console.log(chalk.green(`[${this.getTime24()}] `)+chalk.bgGreen(chalk.black(" INFO "))+` ${emoji} ${s}`);
+        console.log(chalk.green(`[${this.getTime()}] `)+chalk.bgGreen(chalk.black(" INFO "))+` ${emoji} ${s}`);
     },
 
     // Prints a warning to the console
     printWarn:function(emoji, s) {
-        console.warn(chalk.green(`[${this.getTime24()}] `)+chalk.bgYellow(chalk.black(" WARN "))+` ${emoji} ${s}`);
+        console.warn(chalk.green(`[${this.getTime()}] `)+chalk.bgYellow(chalk.black(" WARN "))+` ${emoji} ${s}`);
     },
 
     // Prints an error to the console
     printError:function(emoji, s) {
-        console.error(chalk.green(`[${this.getTime24()}] `)+chalk.bgRed(chalk.black(" ERROR "))+` ${emoji} ${s}`);
+        console.error(chalk.green(`[${this.getTime()}] `)+chalk.bgRed(chalk.black(" ERROR "))+` ${emoji} ${s}`);
     },
 
-    getTime24:function() {
+    // Gets the current time in either 24 or 12 hour time
+    getTime:function() {
         const time = new Date();
         // Check if the user wants 24 hour or 12 hour time
         if (config["24hour"]) {
