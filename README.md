@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img align="center" height="150" src="http://eusv.ml/images/RevolutionLossless.png">
+  <img align="center" height="150" src="http://eusv.ml/images/RevolutionLossless.webp">
 </h1>
 
 [![Release](https://img.shields.io/github/v/release/tgpethan/revolution.svg)](https://github.com/tgpethan/Revolution/releases/latest)
