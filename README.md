@@ -22,12 +22,6 @@ cd Revolution
 npm i
 node .
 ```
-### From build
-```
-Download latest build https://github.com/tgpethan/Revolution/releases/latest
-Unzip the zip
-Run the Revolution executable
-```
 ## How to install modules.
 With modules you simply have to place the module inside the modules folder and start the server.
 The modules will automatically set themselves up and the server will start as normal.
