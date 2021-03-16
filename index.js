@@ -115,14 +115,14 @@ fs.readFile('./misc/ascii.txt', function(err, data) {
 
 function frameworkServer() {
     // Load in the request handler's extra required items.
-    reqhandler.extras();
+    await reqhandler.extras();
     // Define where GET requests go to in the request handlers.
-    app.get('*', (req, res) => {
+    app.get('*', async (req, res) => {
         res.set("X-Powered-By", "Revolution");
         reqhandler.get(req, res);
     });
     // Define where POST requests go to in the request handlers.
-    app.post('*', (req, res) => {
+    app.post('*', async (req, res) => {
         res.set("X-Powered-By", "Revolution");
         reqhandler.post(req, res);
     });
