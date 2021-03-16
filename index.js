@@ -108,12 +108,12 @@ fs.readFile('./misc/ascii.txt', function(err, data) {
                 global.modules.consoleHelper.printError(emoji.cross, "No request handler was loaded, possibly due to an error.");
                 process.exit(1);
             }
-            frameworkServer();
+            start();
         }
     });
 });
 
-function frameworkServer() {
+async function start() {
     // Load in the request handler's extra required items.
     await reqhandler.extras();
     // Define where GET requests go to in the request handlers.
