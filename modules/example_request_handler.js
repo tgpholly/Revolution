@@ -59,3 +59,5 @@ module.exports = {
 }
 
 module.exports.MOD_FUNC = MODULE_FUNCTION;
+
+module.exports.REQUIRED_NODE_MODULES = [];

@@ -35,6 +35,8 @@ global.modules = [];
 let startTime = Date.now(),
 reqhandler;
 
+let shutdownOnInitEnd = false;
+
 // Clear console before printing anything
 console.clear();
 
@@ -46,7 +48,7 @@ fs.readFile('./misc/ascii.txt', function(err, data) {
 	console.log(highlightHeader(data));
 	// Get the modules from the ./modules folder
 	fs.readdir("./modules", (err, files) => {
-		// Make sure there are no errors
+		// Throw if we failed to read folder
 		if (err) throw err;
 		for (var i = 0; i < files.length; i++) {
 			/*
@@ -58,20 +60,71 @@ fs.readFile('./misc/ascii.txt', function(err, data) {
 				// Make sure the file has the extention of .js
 				if (files[i].includes(".js")) {
 					console.log(`[Modules] Found module ${files[i].toString()}`);
-					global.modules[files[i].toString().replace(".js", "")] = require(`./modules/${files[i].toString()}`);
-					
-					// We want to find out what the request handler module is
-					if (global.modules[files[i].toString().replace(".js", "")].MOD_FUNC == "handle_requests") {
-						// Set reqhandler to the request handler for easy getting
-						reqhandler = global.modules[files[i].toString().replace(".js", "")];
+					const thisModule = global.modules[files[i].toString().replace(".js", "")] = require(`./modules/${files[i].toString()}`);
+
+					let nodeModulesCheck = [];
+					thisModule.REQUIRED_NODE_MODULES.forEach(module => {
+						try {
+							require(module);
+						} catch (e) {
+							// we'll only get down here if the module is not installed or has an error
+							if ((!config.other.auto_install_modules && e.code != "MODULE_NOT_FOUND")) 
+								console.error(chalk.bgRed(chalk.black(` ! [Modules] ${files[i].replace(".js", "")} requires node module "${module}" but it ${e.code != "MODULE_NOT_FOUND" ? "failed to load" : "is not installed"} `)));
+							
+							if (e.code != "MODULE_NOT_FOUND") {
+								console.error(e);
+							}
+							// Push module name so we can install it if
+							// it is enabled in the config
+							nodeModulesCheck.push(module);
+						}
+					});
+
+					if (nodeModulesCheck.length != 0) {
+						// Check if we can auto install node modules
+						if (config.other.auto_install_modules) {
+							// We've been told to install modules for the user lmao
+							const { execSync } = require("child_process");
+							console.log(`[Modules] Installing all ${files[i].replace(".js", "")} node modules...`);
+							let installed = 0;
+							nodeModulesCheck.forEach(module => {
+								console.log(`[Modules] [${(installed++) + 1}/${nodeModulesCheck.length}] Installing ${module}...`);
+								execSync(`npm i --save ${module.split("\"").join("").split("'").join("").split(";").join("").split("&").join("")}`)
+							});
+							console.log(`[Modules] Installed all ${files[i].replace(".js", "")} node modules`);
+							// Clear it out
+							nodeModulesCheck = [];
+						} else {
+							// We can't auto install node modules so just make sure Revolution shuts down at the end of module loading.
+							// We want the user to have a full picture of what they need to install
+							shutdownOnInitEnd = true;
+						}
 					}
 
-					// Loop through and set the required modules flags
+					// If this is 0 we can safely init the module
+					if (nodeModulesCheck.length == 0 && thisModule.init != null) {
+						console.log(`[Modules] Running init for ${files[i]}`);
+						try {
+							thisModule.init();
+						} catch (e) {
+							console.log(chalk.bgRed(chalk.black(` ! [Modules] There was an issue running init for ${files[i]}`)));
+							console.log(chalk.bgRed(chalk.black(` ! [Modules] ${err}`)));
+						}
+					}
+					
+					// We want to find out what the request handler module is
+					if (thisModule.MOD_FUNC == "handle_requests") {
+						// Set reqhandler to the request handler for easy getting
+						reqhandler = thisModule;
+					}
+
+					// Loop through the required modules
 					for (var i1 = 0; i1 < requiredModules.length; i1++) {
 						// Check if this module is a required module
-						if (global.modules[files[i].toString().replace(".js", "")].MOD_FUNC == requiredModules[i1].name) {
-							// It is a required module, set the status flag of this one to true
+						if (thisModule.MOD_FUNC == requiredModules[i1].name) {
+							// It is a required module, set the status of this one to true
 							requiredModules[i1].status = true;
+							break;
 						}
 					}
 				} else {
@@ -82,8 +135,8 @@ fs.readFile('./misc/ascii.txt', function(err, data) {
 					console.log(`[Modules] Found file ${files[i]}. It is not a module.`)
 				}
 			} catch (err) {
-				console.log(chalk.bgRed(` ! [Modules] There was an issue loading ${files[i]} ! `));
-				console.log(chalk.bgRed(` ! [Modules] ${err} ! `));
+				console.log(chalk.bgRed(chalk.black(` ! [Modules] There was an issue loading ${files[i]}`)));
+				console.log(chalk.bgRed(chalk.black(` ! [Modules] ${err}`)));
 			}
 		}
 		// Check if all the required modules flags are set
@@ -95,9 +148,13 @@ fs.readFile('./misc/ascii.txt', function(err, data) {
 		// Make sure all required modules are found
 		if (allRequiredExist.length !== requiredModules.length) {
 			// Inform the user that not all required modules are found.
-			console.log("[Modules] All required modules could not be found.");
-			console.log("[Modules] Server will not start until all required modules are found.");
+			console.log(chalk.bgRed(chalk.black(" ! [Modules] All required modules could not be found. ")));
+			console.log(chalk.bgRed(chalk.black(" ! [Modules] Server will not start until all required modules are found. ")));
 			// They are not all found, exit Revolution with code 1.
+			process.exit(1);
+		} else if (shutdownOnInitEnd) {
+			console.log("\n" + chalk.bgRed(chalk.black(" ! [Modules] Required node modules for one or more modules could not be found. ")));
+			console.log(chalk.bgRed(chalk.black(" ! [Modules] Either install all required modules or enable auto install in the config. ")));
 			process.exit(1);
 		} else {
 			// All required modules are found, start Revolution's server.

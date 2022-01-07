@@ -72,6 +72,8 @@ module.exports = {
 
 module.exports.MOD_FUNC = MODULE_FUNCTION;
 
+module.exports.REQUIRED_NODE_MODULES = [];
+
 // Date returns numbers without a 0 in front of them of course so this adds them.
 function correctValue(i) {
     if (i < 10) {

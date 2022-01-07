@@ -1,6 +1,9 @@
 {
-    "server": {
-        "port":5906,
-        "instance_type":"Default"
-    }
+	"server": {
+		"port": 5906,
+		"instance_type": "Default"
+	},
+	"other": {
+		"auto_install_modules": false
+	}
 }

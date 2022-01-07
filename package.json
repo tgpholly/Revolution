@@ -1,16 +1,14 @@
 {
-  "name": "revolution",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "MIT",
-  "dependencies": {
-    "chalk": "^2.4.2",
-    "express": "^4.17.1",
-    "http": "0.0.0"
-  }
+	"name": "revolution",
+	"description": "Revolution is a web server that I designed to be flexible to fit the needs of it's applications. It is mainly used in my Screenshot server, EUS which was recently rewriten. It's main design goal was to be modular.",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {},
+	"keywords": [],
+	"author": "",
+	"license": "MIT",
+	"dependencies": {
+		"express": "^4.17.2",
+		"chalk": "^4.1.2"
+	}
 }
