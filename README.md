@@ -1,8 +1,7 @@
 <h1 align="center">
-  <img align="center" height="150" src="http://eusv.ml/images/RevolutionLossless.webp">
+  <img align="center" height="150" src="http://eusv.net/images/RevolutionLossless.webp">
 </h1>
 
-[![Release](https://img.shields.io/github/v/release/tgpethan/revolution.svg)](https://github.com/tgpethan/Revolution/releases/latest)
 [![CodeFactor](https://www.codefactor.io/repository/github/tgpethan/revolution/badge)](https://www.codefactor.io/repository/github/tgpethan/revolution)
 [![Discord](https://img.shields.io/discord/477024246959308810?color=7289da&label=Discord&logo=discord&logoColor=ffffff)](https://discord.gg/BV8QGn6)
 ## What is Revolution?
