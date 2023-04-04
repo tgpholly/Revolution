@@ -2,7 +2,7 @@
   <img align="center" height="150" src="http://eusv.net/images/RevolutionLossless.webp">
 </h1>
 
-[![CodeFactor](https://www.codefactor.io/repository/github/tgpethan/revolution/badge)](https://www.codefactor.io/repository/github/tgpethan/revolution)
+[![CodeFactor](https://www.codefactor.io/repository/github/tgpholly/revolution/badge)](https://www.codefactor.io/repository/github/tgpholly/revolution)
 [![Discord](https://img.shields.io/discord/477024246959308810?color=7289da&label=Discord&logo=discord&logoColor=ffffff)](https://discord.gg/BV8QGn6)
 ## What is Revolution?
 Revolution is a modular web server, written in node.js and was built with my web projects in mind, but others might find a use in it.
