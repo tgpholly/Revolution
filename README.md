@@ -16,7 +16,7 @@ Modules are loaded in at runtime and are completely separate from each other. Ea
 ## How to use Revolution.
 ### From source
 ```
-git clone https://github.com/tgpethan/Revolution.git
+git clone https://github.com/tgpholly/Revolution.git
 cd Revolution
 npm i
 node .
